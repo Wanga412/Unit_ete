@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+
+<head>
+  <title>Statistiques</title>
+</head>
+
+<body>
+  <div class="container" >
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center mt-5">
+
+      <!--Grid column-->
+      <div class="col-md-10">
+
+        <canvas id="lineChart"></canvas>
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+  </div>
+  <div class="container">
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center mt-5">
+
+      <!--Grid column-->
+      <div class="col-md-10">
+
+        <canvas id="lineChart1"></canvas>
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+  </div>
+  <div class="container">
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center mt-5">
+      <!--Grid column-->
+      <div class="col-md-10">
+
+        <canvas id="lineChart2"></canvas>
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+  </div>
+  <div class="container">
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center mt-5">
+      <!--Grid column-->
+      <div class="col-md-10">
+        <canvas id="lineChart3"></canvas>
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var valeur = JSON.parse('{{value | tojson}}');
+var ctxL = document.getElementById("lineChart").getContext('2d');
+    var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
+    gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
+    gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
+
+    
+    var myLineChart = new Chart(ctxL, {
+      type: 'line',
+      data: {
+        datasets: [
+          {
+            label: "Lumière",
+            backgroundColor: gradientFill,
+            borderColor: [
+              '#AD35BA',
+            ],
+            borderWidth: 2,
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
+          }
+        ]
+      },
+      options: {
+        responsive: true
+      }
+    });
+    var ctxL1 = document.getElementById("lineChart1").getContext('2d');
+    var gradientFill = ctxL1.createLinearGradient(0, 0, 0, 290);
+    gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
+    gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
+
+    
+    var myLineChart1 = new Chart(ctxL1, {
+      type: 'line',
+      data: {
+        datasets: [
+          {
+            label: "Humudité",
+            backgroundColor: gradientFill,
+            borderColor: [
+              '#AD35BA',
+            ],
+            borderWidth: 2,
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
+          }
+        ]
+      },
+      options: {
+        responsive: true
+      }
+    });
+
+
+    var ctxL2 = document.getElementById("lineChart2").getContext('2d');
+    var gradientFill = ctxL2.createLinearGradient(0, 0, 0, 290);
+    gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
+    gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
+
+    
+    var myLineChart2 = new Chart(ctxL2, {
+      type: 'line',
+      data: {
+        datasets: [
+          {
+            label: "Température",
+            backgroundColor: gradientFill,
+            borderColor: [
+              '#AD35BA',
+            ],
+            borderWidth: 2,
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
+          }
+        ]
+      },
+      options: {
+        responsive: true
+      }
+    });
+    var ctxL3 = document.getElementById("lineChart3").getContext('2d');
+    var gradientFill = ctxL3.createLinearGradient(0, 0, 0, 290);
+    gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
+    gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
+
+    
+    var myLineChart3 = new Chart(ctxL3, {
+      type: 'line',
+      data: {
+        datasets: [
+          {
+            label: "Pression",
+            backgroundColor: gradientFill,
+            borderColor: [
+              '#AD35BA',
+            ],
+            borderWidth: 2,
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
+          }
+        ]
+      },
+      options: {
+        responsive: true
+      }
+    });
+    longeur = valeur[0].length;
+    for (let i = 0; i < longeur; i++) {
+        myLineChart.data.datasets[0].data.push(valeur[0][i]);
+        myLineChart1.data.datasets[0].data.push(valeur[1][i]);
+        myLineChart2.data.datasets[0].data.push(valeur[2][i]);
+        myLineChart3.data.datasets[0].data.push(valeur[3][i]);
+
+        myLineChart.data.labels.push(valeur[4][i]);
+        myLineChart1.data.labels.push(valeur[4][i]);
+        myLineChart2.data.labels.push(valeur[4][i]);
+        myLineChart3.data.labels.push(valeur[4][i]);
+
+    }
+    /*
+    myLineChart.data.datasets[0].data = [100,34,23,28];
+    myLineChart.data.labels = ["dab"]*/
+    myLineChart.update();
+    myLineChart1.update();
+    myLineChart2.update();
+    myLineChart3.update();
+
+</script>
+</html>
